@@ -1,3 +1,4 @@
+
 name: Build Orthopedic Clinic APK
 
 on:
@@ -26,8 +27,6 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-        with:
-          build-root-directory: OrthopedicClinic
 
       - name: Grant execute permission
         working-directory: OrthopedicClinic
