@@ -15,6 +15,10 @@ jobs:
     name: Build Android APK
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: OrthopedicClinic
+
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
@@ -25,16 +29,18 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Gradle
+      - name: Install Gradle 8.9
         uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
 
-      - name: Grant execute permission
-        working-directory: OrthopedicClinic
-        run: chmod +x gradlew
+      - name: Check project files
+        run: |
+          pwd
+          ls -la
 
       - name: Build Debug APK
-        working-directory: OrthopedicClinic
-        run: ./gradlew assembleDebug --stacktrace
+        run: gradle assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
